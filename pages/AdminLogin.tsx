@@ -11,7 +11,9 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Simple password protection - in production, use proper authentication
+    // SECURITY NOTE: For production, replace with proper authentication
+    // Options: Supabase Auth, Auth0, Firebase Auth, or environment variable
+    // Example: if (password === import.meta.env.VITE_ADMIN_PASSWORD) {
     if (password === 'lexxban2024' || password === 'admin') {
       localStorage.setItem('lexxban_admin_auth', 'true');
       onLogin();

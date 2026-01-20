@@ -16,6 +16,11 @@ interface Lead {
   estado: string;
 }
 
+// Utility function to check if Supabase is available
+const isSupabaseAvailable = () => {
+  return supabase && typeof supabase.from === 'function';
+};
+
 const AdminDashboard: React.FC = () => {
   const [leads, setLeads] = useState<Lead[]>([]);
   const [loading, setLoading] = useState(true);
@@ -30,7 +35,7 @@ const AdminDashboard: React.FC = () => {
   const fetchLeads = async () => {
     setLoading(true);
     try {
-      if (supabase && typeof supabase.from === 'function') {
+      if (isSupabaseAvailable()) {
         const { data, error } = await supabase
           .from('leads_hipotecarios')
           .select('*')
@@ -47,19 +52,34 @@ const AdminDashboard: React.FC = () => {
   };
 
   const updateLeadStatus = async (leadId: string, newStatus: string) => {
+    // Optimistic update - update UI immediately
+    setLeads(prevLeads => 
+      prevLeads.map(lead => 
+        lead.id === leadId ? { ...lead, estado: newStatus } : lead
+      )
+    );
+    
+    if (selectedLead?.id === leadId) {
+      setSelectedLead({ ...selectedLead, estado: newStatus });
+    }
+
+    // Then update database
     try {
-      if (supabase && typeof supabase.from === 'function') {
+      if (isSupabaseAvailable()) {
         const { error } = await supabase
           .from('leads_hipotecarios')
           .update({ estado: newStatus })
           .eq('id', leadId);
         
-        if (!error) {
+        if (error) {
+          // Revert on error
           fetchLeads();
-          setSelectedLead(null);
+          console.error('Error updating lead:', error);
         }
       }
     } catch (e) {
+      // Revert on error
+      fetchLeads();
       console.error('Error updating lead:', e);
     }
   };
@@ -214,7 +234,7 @@ const AdminDashboard: React.FC = () => {
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-2">
-                      <h3 className="text-xl font-bold text-white">{lead.nombre || 'Sin nombre'}</h3>
+                      <h3 className="text-xl font-bold text-white">{lead.nombre || 'N/A'}</h3>
                       <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest border ${getStatusColor(lead.estado)}`}>
                         {lead.estado}
                       </span>
