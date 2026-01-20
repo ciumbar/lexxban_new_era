@@ -1,27 +1,68 @@
 
 import React from 'react';
 
+// Custom Premium SVG Icons Components
+const FiscalIcon = () => (
+  <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-10 h-10">
+    <path d="M32 8L52 16V32C52 44.5 43.5 54.5 32 58C20.5 54.5 12 44.5 12 32V16L32 8Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round"/>
+    <path d="M24 38V30" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+    <path d="M32 38V24" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+    <path d="M40 38V34" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+  </svg>
+);
+
+const PatrimoniosIcon = () => (
+  <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-10 h-10">
+    <rect x="22" y="12" width="20" height="12" rx="6" stroke="currentColor" strokeWidth="2"/>
+    <path d="M32 24V52" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+    <path d="M32 38H40" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+    <path d="M32 46H40" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+    <circle cx="32" cy="18" r="3" fill="currentColor"/>
+  </svg>
+);
+
+const MercantilIcon = () => (
+  <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-10 h-10">
+    <path d="M32 12V52" stroke="currentColor" strokeWidth="2"/>
+    <path d="M12 24L32 18L52 24" stroke="currentColor" strokeWidth="2" strokeLinejoin="round"/>
+    <path d="M16 42C16 42 12 38 12 32C12 26 16 24 16 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+    <path d="M48 42C48 42 52 38 52 32C52 26 48 24 48 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+    <path d="M24 52H40" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+  </svg>
+);
+
+const EstrategicaIcon = () => (
+  <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-10 h-10">
+    <circle cx="32" cy="32" r="24" stroke="currentColor" strokeWidth="2"/>
+    <path d="M32 18L36 32L32 46L28 32L32 18Z" fill="currentColor"/>
+    <path d="M32 14V10" stroke="currentColor" strokeWidth="2"/>
+    <path d="M32 54V50" stroke="currentColor" strokeWidth="2"/>
+    <path d="M54 32H50" stroke="currentColor" strokeWidth="2"/>
+    <path d="M14 32H10" stroke="currentColor" strokeWidth="2"/>
+  </svg>
+);
+
 const Services: React.FC = () => {
   const services = [
     {
       title: "Asesoría Fiscal",
       description: "Optimización tributaria estratégica y cumplimiento normativo nacional para estructuras corporativas complejas y grandes patrimonios.",
-      icon: "account_balance_wallet"
+      icon: <FiscalIcon />
     },
     {
       title: "Gestión de Patrimonios",
       description: "Preservación y crecimiento de activos familiares mediante estrategias discretas de inversión y planificación sucesoria personalizada.",
-      icon: "castle"
+      icon: <PatrimoniosIcon />
     },
     {
       title: "Derecho Mercantil",
       description: "Asesoramiento integral en fusiones, adquisiciones y transacciones con un enfoque en la seguridad jurídica institucional.",
-      icon: "gavel"
+      icon: <MercantilIcon />
     },
     {
       title: "Consultoría Estratégica",
       description: "Acompañamiento en la toma de decisiones críticas para la expansión y el posicionamiento competitivo de su organización.",
-      icon: "insights"
+      icon: <EstrategicaIcon />
     }
   ];
 
@@ -43,8 +84,8 @@ const Services: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {services.map((service, index) => (
           <div key={index} className="glass-panel p-10 md:p-14 rounded-2xl flex flex-col gap-8 group hover:border-primary/40 transition-all duration-500">
-            <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
-              <span className="material-symbols-outlined !text-3xl">{service.icon}</span>
+            <div className="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-500">
+              {service.icon}
             </div>
             <div className="space-y-4">
               <h3 className="text-3xl font-display font-bold dark:text-white text-slate-800">{service.title}</h3>
@@ -62,7 +103,7 @@ const Services: React.FC = () => {
         ))}
       </div>
 
-      {/* Contact Section CTA - Divided for Calendly Integration */}
+      {/* Contact Section CTA */}
       <section className="mt-32 w-full glass-panel rounded-3xl overflow-hidden relative shadow-2xl">
         <div className="absolute -top-24 -right-24 size-80 bg-primary/10 blur-[100px] rounded-full"></div>
         
@@ -108,7 +149,6 @@ const Services: React.FC = () => {
                   Este espacio está reservado para la integración directa con Calendly. Próximamente podrá agendar sus sesiones aquí.
                 </p>
               </div>
-              {/* Shimmer effect to indicate dynamic area */}
               <div className="w-full max-w-[240px] space-y-3">
                 <div className="h-2 w-full bg-primary/10 rounded-full overflow-hidden relative">
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/20 to-transparent -translate-x-full animate-[shimmer_2s_infinite]"></div>
