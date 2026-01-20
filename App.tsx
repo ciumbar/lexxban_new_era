@@ -1,28 +1,33 @@
 
 import React, { useState, useEffect } from 'react';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import Home from './pages/Home';
-import Services from './pages/Services';
-import Vision from './pages/Vision';
-import Contact from './pages/Contact';
+import Navbar from './components/Navbar.tsx';
+import Footer from './components/Footer.tsx';
+import Home from './pages/Home.tsx';
+import Services from './pages/Services.tsx';
+import Vision from './pages/Vision.tsx';
+import Contact from './pages/Contact.tsx';
 
 const App: React.FC = () => {
   const [isDarkMode, setIsDarkMode] = useState(() => {
-    const saved = localStorage.getItem('theme');
-    return saved ? saved === 'dark' : true;
+    try {
+      const saved = localStorage.getItem('theme');
+      return saved ? saved === 'dark' : true;
+    } catch (e) {
+      return true;
+    }
   });
 
-  // Handle Theme Persistence
   useEffect(() => {
     const root = document.documentElement;
     if (isDarkMode) {
       root.classList.add('dark');
       root.classList.remove('light');
+      document.body.classList.add('dark');
       localStorage.setItem('theme', 'dark');
     } else {
       root.classList.remove('dark');
       root.classList.add('light');
+      document.body.classList.remove('dark');
       localStorage.setItem('theme', 'light');
     }
   }, [isDarkMode]);
@@ -41,7 +46,6 @@ const App: React.FC = () => {
       />
       
       <main className="flex-grow pt-24">
-        {/* Usamos etiquetas section con IDs únicos para la navegación One-Page */}
         <section id="home" className="relative">
           <Home />
         </section>

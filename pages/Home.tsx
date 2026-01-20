@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import MortgageCalculator from '../components/MortgageCalculator';
+import MortgageCalculator from '../components/MortgageCalculator.tsx';
 
 const Home: React.FC = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -15,7 +15,7 @@ const Home: React.FC = () => {
 
   return (
     <div className="flex flex-col items-center px-6 pb-20 overflow-hidden">
-      {/* Hero Section - España */}
+      {/* Hero Section */}
       <section className="w-full max-w-[1100px] glass-panel rounded-[40px] p-10 md:p-24 text-center flex flex-col items-center gap-10 relative overflow-hidden">
         {/* Parallax Background Orbs */}
         <div 
@@ -28,7 +28,7 @@ const Home: React.FC = () => {
         ></div>
         
         <div 
-          className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-primary/10 border border-primary/20 text-[11px] font-bold uppercase tracking-[0.25em] dark:text-white text-primary transition-transform duration-100 ease-out"
+          className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-primary/10 border border-primary/20 text-[11px] font-bold uppercase tracking-[0.25em] dark:text-white text-primary"
           style={{ transform: `translateY(${scrollY * 0.05}px)` }}
         >
           <span className="flex h-2 w-2 rounded-full bg-primary animate-pulse"></span>
@@ -37,13 +37,13 @@ const Home: React.FC = () => {
         
         <div className="flex flex-col gap-8 max-w-[900px]">
           <h1 
-            className="text-5xl md:text-8xl font-black leading-[1] tracking-tighter dark:text-white text-slate-900 font-display transition-transform duration-100 ease-out"
+            className="text-5xl md:text-8xl font-black leading-[1] tracking-tighter dark:text-white text-slate-900 font-display"
             style={{ transform: `translateY(${scrollY * 0.1}px)` }}
           >
             Gestión de <span className="text-primary italic">Activos</span> de Alta Dirección.
           </h1>
           <p 
-            className="text-lg md:text-2xl dark:text-white/60 text-slate-500 font-light leading-relaxed max-w-[700px] mx-auto transition-transform duration-100 ease-out"
+            className="text-lg md:text-2xl dark:text-white/60 text-slate-500 font-light leading-relaxed max-w-[700px] mx-auto"
             style={{ transform: `translateY(${scrollY * 0.08}px)` }}
           >
             Soluciones estratégicas exclusivas para el mercado español. Seguridad jurídica y financiera desde el corazón financiero de Madrid.
@@ -51,7 +51,7 @@ const Home: React.FC = () => {
         </div>
         
         <div 
-          className="flex flex-wrap items-center justify-center gap-5 mt-4 transition-transform duration-100 ease-out"
+          className="flex flex-wrap items-center justify-center gap-5 mt-4"
           style={{ transform: `translateY(${scrollY * 0.04}px)` }}
         >
           <a 
